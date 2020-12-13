@@ -1,0 +1,12 @@
+language: java
+sudo: true
+jdk: oraclejdk11
+install:
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+addons:
+  sonarcloud:
+    organization: "alexisdevmaster"
+    token: $SECRETVALUE
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=AlexisDevMaster_VVCL_TP2
